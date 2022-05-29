@@ -1,19 +1,19 @@
-using Microsoft.AspNetCore.Mvc;
-using Xpense.Data;
+// using Microsoft.AspNetCore.Mvc;
+// using Xpense.Data;
 
-namespace Xpense.Controllers
-{
-    [ApiController]
-    [Route("/api/v1/[controller]")]
-    public class UsersController : ControllerBase
-    {
-        private readonly ExpenseContext _context;
+// namespace Xpense.Controllers
+// {
+//     [ApiController]
+//     [Route("/api/v1/[controller]")]
+//     public class UsersController : ControllerBase
+//     {
+//         private readonly ExpenseContext _context;
 
-        public UsersController(ExpenseContext context)
-        {
-            _context = context;
-        }
+//         public UsersController(ExpenseContext context)
+//         {
+//             _context = context;
+//         }
 
 
-    }
-}
+//     }
+// }

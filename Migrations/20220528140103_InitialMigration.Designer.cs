@@ -10,7 +10,7 @@ using Xpense.Data;
 namespace Xpense.Migrations
 {
     [DbContext(typeof(ExpenseContext))]
-    [Migration("20220528101139_InitialMigration")]
+    [Migration("20220528140103_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,8 +23,9 @@ namespace Xpense.Migrations
 
             modelBuilder.Entity("Xpense.Models.ExpenseCategory", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
                     b.Property<string>("CategoryName")
@@ -35,6 +36,18 @@ namespace Xpense.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_created");
 
+                    b.Property<DateTimeOffset>("DateDeleted")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_deleted");
+
+                    b.Property<DateTimeOffset>("DateUpdated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_updated");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
                     b.HasKey("Id");
 
                     b.ToTable("expense_categories");
@@ -42,8 +55,9 @@ namespace Xpense.Migrations
 
             modelBuilder.Entity("Xpense.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("DateJoined")
@@ -51,10 +65,12 @@ namespace Xpense.Migrations
                         .HasColumnName("date_joined");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("email");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("username");
 
@@ -65,12 +81,13 @@ namespace Xpense.Migrations
 
             modelBuilder.Entity("Xpense.Models.UserExpense", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("text")
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<DateTimeOffset>("DateCreated")
@@ -82,6 +99,7 @@ namespace Xpense.Migrations
                         .HasColumnName("expense_amount");
 
                     b.Property<string>("ExpenseName")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("expense_name");
 

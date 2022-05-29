@@ -15,7 +15,7 @@ namespace Xpense.Models
         /// </summary>
         /// <value></value>
         [Column("id"), Key]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// unique name of user

@@ -8,7 +8,7 @@ namespace Xpense.Models
     public class UserExpense
     {
         [Column("id"), Key]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("expense_name"), Required]
         public string ExpenseName { get; set; }
@@ -20,6 +20,6 @@ namespace Xpense.Models
         public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 
         [Column("category_id"), ForeignKey("ExpenseCategory")]
-        public string CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

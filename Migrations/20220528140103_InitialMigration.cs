@@ -11,9 +11,12 @@ namespace Xpense.Migrations
                 name: "expense_categories",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     category_name = table.Column<string>(type: "text", nullable: true),
-                    date_created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    date_created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    date_updated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    date_deleted = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    is_deleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,11 +27,11 @@ namespace Xpense.Migrations
                 name: "user_expenses",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    expense_name = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    expense_name = table.Column<string>(type: "text", nullable: false),
                     expense_amount = table.Column<int>(type: "integer", nullable: false),
                     date_created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    category_id = table.Column<string>(type: "text", nullable: true)
+                    category_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,9 +42,9 @@ namespace Xpense.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    username = table.Column<string>(type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    username = table.Column<string>(type: "text", nullable: false),
+                    email = table.Column<string>(type: "text", nullable: false),
                     date_joined = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>

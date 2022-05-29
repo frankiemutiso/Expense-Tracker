@@ -36,13 +36,17 @@ namespace Xpense.Controllers
                 });
             }
 
-            return Ok(res);
+            return Ok(new
+            {
+                data = res,
+                count = res.Count
+            });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCategoryAsync(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategoryAsync([FromRoute] Guid id)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(id.ToString()))
             {
                 return BadRequest(new { Message = "Category id is required" });
             }
@@ -71,6 +75,7 @@ namespace Xpense.Controllers
 
             var req = new ExpenseCategory
             {
+                Id = new Guid(),
                 CategoryName = model.CategoryName,
             };
 
@@ -81,9 +86,9 @@ namespace Xpense.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditCategoryAsync([FromRoute] string id, [FromBody] CategoryWriteModel model)
+        public async Task<IActionResult> EditCategoryAsync([FromRoute] Guid id, [FromBody] CategoryWriteModel model)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(id.ToString()))
             {
                 return BadRequest(new { Message = "The category id is required" });
             }
@@ -105,9 +110,9 @@ namespace Xpense.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryAsync(string id)
+        public async Task<IActionResult> DeleteCategoryAsync([FromRoute] Guid id)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(id.ToString()))
             {
                 return BadRequest(new { Message = "The category id is required" });
             }
@@ -124,9 +129,7 @@ namespace Xpense.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = $"Category with id '{id}' was deleted successfully" });
+            return NoContent();
         }
-
-
     }
 }
