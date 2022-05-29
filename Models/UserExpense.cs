@@ -10,8 +10,8 @@ namespace Xpense.Models
         [Column("id"), Key]
         public Guid Id { get; set; }
 
-        [Column("expense_name"), Required]
-        public string ExpenseName { get; set; }
+        [Column("expense_description"), Required]
+        public string ExpenseDescription { get; set; }
 
         [Column("expense_amount"), Required]
         public int ExpenseAmount { get; set; }
@@ -19,7 +19,16 @@ namespace Xpense.Models
         [Column("date_created")]
         public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 
-        [Column("category_id"), ForeignKey("ExpenseCategory")]
+        [Column("date_updated")]
+        public DateTimeOffset DateUpdated { get; set; } = DateTimeOffset.UtcNow;
+
+        [Column("date_deleted")]
+        public DateTimeOffset DateDeleted { get; set; }
+
+        [Column("is_deleted")]
+        public bool IsDeleted { get; set; }
+
+        [Column("category_id")]
         public Guid CategoryId { get; set; }
     }
 }
