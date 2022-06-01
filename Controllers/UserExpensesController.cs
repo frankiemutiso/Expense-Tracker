@@ -32,6 +32,7 @@ namespace Xpense.Controllers
                                             DateCreated = expense.DateCreated,
                                             CategoryId = expense.CategoryId
                                         })
+                                        .OrderByDescending(expense => expense.DateCreated)
                                         .ToListAsync();
 
             return Ok(new
@@ -59,7 +60,7 @@ namespace Xpense.Controllers
                                             DateCreated = expense.DateCreated,
                                             CategoryId = expense.CategoryId
                                         })
-                                        .OrderByDescending(item => item.DateCreated)
+                                        .OrderByDescending(expense => expense.DateCreated)
                                         .ToListAsync();
 
             return Ok(new
