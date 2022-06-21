@@ -32,10 +32,30 @@ namespace Xpense.Models
         public string Email { get; set; }
 
         /// <summary>
+        /// password of user
+        /// </summary>
+        /// <value></value>
+        [Column("password"), Required]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// role of user
+        /// </summary>
+        /// <value></value>
+        [Column("role"), Required]
+        public UserRoles Role { get; set; } = UserRoles.User;
+
+        /// <summary>
         /// date joined
         /// </summary>
         /// <value></value>
         [Column("date_joined")]
         public DateTimeOffset DateJoined { get; set; } = DateTimeOffset.UtcNow;
+    }
+
+    public enum UserRoles
+    {
+        Admin,
+        User
     }
 }
