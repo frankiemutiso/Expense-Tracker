@@ -15,16 +15,16 @@ using Xpense.Models;
 
 namespace Xpense.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;
         private readonly ExpenseContext _context;
-        public LoginController(IConfiguration config)
+        public LoginController(IConfiguration config, ExpenseContext context)
         {
             _config = config;
-
+            _context = context;
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@ namespace Xpense.Controllers
             {
                 var token = Generate(user);
 
-                return Ok(token);
+                return Ok(new { Token = token });
             }
 
             return NotFound("User Not Found");

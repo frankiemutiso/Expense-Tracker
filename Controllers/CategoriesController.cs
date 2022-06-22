@@ -11,11 +11,11 @@ namespace Xpense.Controllers
 {
     [ApiController]
     [Route("/api/v1/[controller]")]
-    public class ExpenseCategoriesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly ExpenseContext _context;
 
-        public ExpenseCategoriesController(ExpenseContext context)
+        public CategoriesController(ExpenseContext context)
         {
             _context = context;
         }
