@@ -35,3 +35,10 @@ C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Frankie-fresh\documents\WebApis\Xpense\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
