@@ -30,5 +30,8 @@ namespace Xpense.Models
 
         [Column("category_id")]
         public Guid CategoryId { get; set; }
+
+        [Column("username")]
+        public string Username { get; set; }
     }
 }

@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xpense.Data;
 using Xpense.DTOs;
+using Xpense.Extensions;
 using Xpense.Models;
 
 namespace Xpense.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class ExpensesController : ControllerBase
@@ -23,7 +26,10 @@ namespace Xpense.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAllExpenseAsync()
         {
+            var username = User.GetUsername();
+
             var expenses = await _context.UserExpenses
+                                        .Where(x => x.Username == username)
                                         .Select(expense => new ExpenseReadModel
                                         {
                                             Id = expense.Id,
@@ -50,8 +56,10 @@ namespace Xpense.Controllers
                 return BadRequest(new { Message = "The category id is required" });
             }
 
+            var username = User.GetUsername();
+
             var expenses = await _context.UserExpenses
-                                        .Where(x => x.CategoryId == categoryId)
+                                        .Where(x => x.CategoryId == categoryId && x.Username == username)
                                         .Select(expense => new ExpenseReadModel
                                         {
                                             Id = expense.Id,
@@ -78,6 +86,7 @@ namespace Xpense.Controllers
                 return BadRequest(new { Message = "The id of the expense is required" });
             }
 
+            var username = User.GetUsername();
             var expense = await _context.UserExpenses.FindAsync(id);
 
             if (expense == null)
@@ -113,12 +122,15 @@ namespace Xpense.Controllers
                 return BadRequest(new { Message = "The category id is required" });
             }
 
+            var username = User.GetUsername();
+
             UserExpense expense = new UserExpense
             {
                 Id = new Guid(),
                 ExpenseDescription = model.ExpenseDescription,
                 ExpenseAmount = model.ExpenseAmount,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                Username = username
             };
 
             await _context.UserExpenses.AddAsync(expense);
@@ -149,8 +161,11 @@ namespace Xpense.Controllers
             {
                 return BadRequest(new { Message = "The category id is required" });
             }
+            var username = User.GetUsername();
 
-            var expense = await _context.UserExpenses.FindAsync(id);
+            var expense = await _context.UserExpenses
+                                        .Where(u => u.Username == username)
+                                        .FirstOrDefaultAsync(x => x.Id == id);
 
             if (expense == null)
             {
